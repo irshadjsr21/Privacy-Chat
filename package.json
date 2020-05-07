@@ -1,0 +1,51 @@
+{
+  "name": "privacy-chat",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "node ./bin/www",
+    "build": "npm run build:js && npm run build:css",
+    "build:js": "webpack --mode production --progress --hide-modules",
+    "build:css": "node-sass ./resources/sass/main.scss ./public/css/main.css --output-style compressed",
+    "dev:start": "nodemon ./bin/www",
+    "dev:build": "concurrently \"npm run dev:build:js\" \"npm run dev:build:css\"",
+    "dev:build:js": "webpack --mode development --progress --hide-modules --watch",
+    "dev:build:css": "node-sass ./resources/sass/main.scss ./public/css/main.css --watch",
+    "dev:analyze:js": "webpack --profile --json > webpack-stats.json && webpack-bundle-analyzer webpack-stats.json ./public/js/"
+  },
+  "author": "Md Irshad Ansari",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "csurf": "^1.11.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.4.0",
+    "http-errors": "^1.7.3",
+    "morgan": "^1.10.0",
+    "pug": "^2.0.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/polyfill": "^7.8.3",
+    "@babel/preset-env": "^7.7.7",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "concurrently": "^5.0.2",
+    "css-loader": "^3.4.0",
+    "html-loader": "^0.5.5",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.13.1",
+    "pug": "^2.0.4",
+    "pug-loader": "^2.4.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.1.2",
+    "vue": "^2.6.11",
+    "vue-loader": "^15.8.3",
+    "vue-router": "^3.1.6",
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "^4.41.5",
+    "webpack-bundle-analyzer": "^3.6.0",
+    "webpack-cli": "^3.3.10",
+    "webpack-manifest-plugin": "^2.2.0"
+  }
+}
