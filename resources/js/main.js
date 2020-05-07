@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import vuetify from './plugins/vuetify';
 import Router from './router';
 
 Vue.use(VueRouter);
@@ -7,9 +8,5 @@ Vue.use(VueRouter);
 new Vue({
   el: '#app',
   router: Router,
-  mounted() {
-    
-    console.log(this.$route);
-    console.log(this);
-  },
+  vuetify,
 });

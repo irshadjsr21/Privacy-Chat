@@ -1,6 +1,6 @@
 import VueRouter from 'vue-router';
 const Home = () => import(/* webpackChunkName: "home" */ './pages/Home');
-const About = () => import(/* webpackChunkName: "about" */ './pages/About');
+const Join = () => import(/* webpackChunkName: "join" */ './pages/Join');
 
 export default new VueRouter({
   mode: 'history',
@@ -10,8 +10,8 @@ export default new VueRouter({
       component: Home,
     },
     {
-      path: '/about',
-      component: About,
+      path: '/join',
+      component: Join,
     },
     {
       path: '*',

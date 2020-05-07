@@ -4,15 +4,21 @@
     <centered class="pt-10">
       <v-card class="elevation-12">
         <v-card-title>
-          Create a Chat
+          Join a Chat
         </v-card-title>
         <v-card-text>
-          <div class="d-flex justify-center">
-          <v-btn color="primary" x-large>Create</v-btn>
-          </div>
+          <v-form>
+            <v-text-field
+              label="Team ID"
+              name="team"
+              prepend-icon="group"
+              type="text"
+            />
+          </v-form>
         </v-card-text>
         <v-card-actions class="d-flex justify-center pb-8 flex-column">
-          <router-link class="mt-4" to="/join">Join a Chat</router-link>
+          <v-btn color="primary">Join</v-btn>
+          <router-link class="mt-4" to="/">Create a Chat</router-link>
         </v-card-actions>
       </v-card>
     </centered>

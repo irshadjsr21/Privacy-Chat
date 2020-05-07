@@ -2,11 +2,15 @@ doctype html
 html
   head
     meta(content="width=device-width, initial-scale=1", name="viewport")
-    link(rel='stylesheet', href='/css/main.css')
+    link(href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900", rel="stylesheet")
     link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
     meta(name="csrf-token", content=csrfToken)
+    style.
+      html {
+        font-family: 'Roboto', sans-serif;
+      }
   body
-    #app
+    v-app#app
       block content
   block preScript
   script(src="/js/main.bundle.js")
