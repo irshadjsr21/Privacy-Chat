@@ -7,6 +7,12 @@
           Create a Chat
         </v-card-title>
         <v-card-text>
+          <v-text-field
+            label="Enter your name"
+            name="name"
+            prepend-icon="person"
+            type="text"
+          />
           <div class="d-flex justify-center">
             <v-btn color="primary" @click="createChat" x-large>Create</v-btn>
           </div>

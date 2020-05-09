@@ -9,6 +9,12 @@
         <v-card-text>
           <v-form>
             <v-text-field
+              label="Enter your name"
+              name="name"
+              prepend-icon="person"
+              type="text"
+            />
+            <v-text-field
               label="Team ID"
               name="team"
               prepend-icon="group"
