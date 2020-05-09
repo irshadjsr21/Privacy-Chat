@@ -1,6 +1,7 @@
 import VueRouter from 'vue-router';
 const Home = () => import(/* webpackChunkName: "home" */ './pages/Home');
 const Join = () => import(/* webpackChunkName: "join" */ './pages/Join');
+const Chat = () => import(/* webpackChunkName: "chat" */ './pages/Chat');
 
 export default new VueRouter({
   mode: 'history',
@@ -12,6 +13,10 @@ export default new VueRouter({
     {
       path: '/join',
       component: Join,
+    },
+    {
+      path: '/chat/:id',
+      component: Chat,
     },
     {
       path: '*',

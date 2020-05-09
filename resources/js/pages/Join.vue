@@ -17,7 +17,7 @@
           </v-form>
         </v-card-text>
         <v-card-actions class="d-flex justify-center pb-8 flex-column">
-          <v-btn color="primary">Join</v-btn>
+          <v-btn color="primary" @click="onJoin">Join</v-btn>
           <router-link class="mt-4" to="/">Create a Chat</router-link>
         </v-card-actions>
       </v-card>
@@ -31,5 +31,10 @@ import Navbar from '../components/Navbar';
 
 export default {
   components: { Centered, Navbar },
+  methods: {
+    onJoin() {
+      console.log('Join');
+    },
+  },
 };
 </script>
