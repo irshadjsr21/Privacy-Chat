@@ -13,17 +13,21 @@
               name="name"
               prepend-icon="person"
               type="text"
+              v-model="name"
+              :error="nameError"
             />
             <v-text-field
-              label="Team ID"
+              label="Chat ID"
               name="team"
               prepend-icon="group"
               type="text"
+              v-model="chatId"
+              :error="chatIdError"
             />
           </v-form>
         </v-card-text>
         <v-card-actions class="d-flex justify-center pb-8 flex-column">
-          <v-btn color="primary" @click="onJoin">Join</v-btn>
+          <v-btn color="primary" @click="joinChat">Join</v-btn>
           <router-link class="mt-4" to="/">Create a Chat</router-link>
         </v-card-actions>
       </v-card>
@@ -37,9 +41,23 @@ import Navbar from '../components/Navbar';
 
 export default {
   components: { Centered, Navbar },
+  data() {
+    return {
+      name: '',
+      nameError: false,
+      chatId: '',
+      chatIdError: false,
+    };
+  },
+
   methods: {
-    onJoin() {
-      console.log('Join');
+    joinChat() {
+      this.error = false;
+      if (this.name) {
+        this.$router.push(`/chat/${this.chatId}?name=${this.name}`);
+      } else {
+        this.error = true;
+      }
     },
   },
 };

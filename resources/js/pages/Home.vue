@@ -12,6 +12,8 @@
             name="name"
             prepend-icon="person"
             type="text"
+            v-model="name"
+            :error="error"
           />
           <div class="d-flex justify-center">
             <v-btn color="primary" @click="createChat" x-large>Create</v-btn>
@@ -31,9 +33,21 @@ import Navbar from '../components/Navbar';
 
 export default {
   components: { Centered, Navbar },
+  data() {
+    return {
+      name: '',
+      error: false,
+    };
+  },
+
   methods: {
     createChat() {
-      this.$router.push('/chat/new');
+      this.error = false;
+      if (this.name) {
+        this.$router.push('/chat/new?name=' + this.name);
+      } else {
+        this.error = true;
+      }
     },
   },
 };
