@@ -21,26 +21,83 @@
       <v-card-text>
         <div class="text--primary">
           <div class="text-center">
-            Share your chat id or the link with your friends
+            Share the chat id with your friends
           </div>
 
-          <div class="text-center">{{ chatId }}</div>
+          <input
+            type="text"
+            :value="chatId"
+            disabled
+            ref="chatId"
+            class="d-none"
+          />
+
+          <div class="text-center font-weight-bold subtitle-1">
+            {{ chatId }}
+          </div>
         </div>
       </v-card-text>
       <v-card-actions class="d-flex justify-space-between">
-        <v-btn text color="deep-purple accent-4">
+        <v-btn @click="copyChatId" text color="deep-purple accent-4">
           Copy Chat ID
         </v-btn>
-        <v-btn text color="deep-purple accent-4">
+        <!-- <v-btn text color="deep-purple accent-4">
           Copy Chat Link
-        </v-btn>
+        </v-btn> -->
       </v-card-actions>
     </v-card>
+
+    <v-snackbar v-model="showSuccessToast" :timeout="2000">
+      Chat ID copied.
+      <v-btn color="blue" text @click="showSuccessToast = false">
+        Close
+      </v-btn>
+    </v-snackbar>
+
+    <v-snackbar v-model="showErrorToast" :timeout="2000">
+      Cannot copy Chat ID.
+      <v-btn color="blue" text @click="showErrorToast = false">
+        Close
+      </v-btn>
+    </v-snackbar>
   </div>
 </template>
 
 <script>
 export default {
   props: ['chatId', 'users', 'me'],
+
+  data() {
+    return {
+      showSuccessToast: false,
+      showErrorToast: false,
+    };
+  },
+
+  methods: {
+    copyChatId() {
+      try {
+        const copyText = this.$refs.chatId;
+        if (!copyText) {
+          throw new Error();
+        }
+        if (copyText.focus && copyText.select && document.execCommand) {
+          /* Select the text field */
+          copyText.focus();
+          copyText.select();
+          copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+          /* Copy the text inside the text field */
+          document.execCommand('copy');
+          this.showSuccessToast = true;
+        } else {
+          throw new Error('No method found.');
+        }
+      } catch (error) {
+        console.log(error);
+        this.showErrorToast = true;
+      }
+    },
+  },
 };
 </script>

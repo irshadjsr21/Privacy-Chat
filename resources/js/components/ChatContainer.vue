@@ -1,6 +1,6 @@
 <template>
   <div class="pa-2 grey lighten-2 chatContainer">
-    <div class="chatMessages">
+    <div ref="chatMessages" class="chatMessages">
       <div v-if="messages" class="pa-4">
         <div
           v-for="(message, index) of messages"
@@ -77,6 +77,17 @@ export default {
     return {
       message: '',
     };
+  },
+
+  watch: {
+    messages() {
+      if (this.$refs && this.$refs.chatMessages) {
+        setTimeout(() => {
+          const elem = this.$refs.chatMessages;
+          elem.scroll(0, elem.scrollHeight);
+        }, 200);
+      }
+    },
   },
 
   methods: {
@@ -157,6 +168,7 @@ export default {
 .messageText {
   padding: 8px;
   width: fit-content;
+  width: -moz-fit-content;
   border-radius: 4px;
 }
 
