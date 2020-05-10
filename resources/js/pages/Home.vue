@@ -7,17 +7,19 @@
           Create a Chat
         </v-card-title>
         <v-card-text>
-          <v-text-field
-            label="Enter your name"
-            name="name"
-            prepend-icon="person"
-            type="text"
-            v-model="name"
-            :error="error"
-          />
-          <div class="d-flex justify-center">
-            <v-btn color="primary" @click="createChat" x-large>Create</v-btn>
-          </div>
+          <v-form @submit.prevent="createChat">
+            <v-text-field
+              label="Enter your name"
+              name="name"
+              prepend-icon="person"
+              type="text"
+              v-model="name"
+              :error="error"
+            />
+            <div class="d-flex justify-center">
+              <v-btn color="primary" type="submit" large>Create</v-btn>
+            </div>
+          </v-form>
         </v-card-text>
         <v-card-actions class="d-flex justify-center pb-8 flex-column">
           <router-link class="mt-4" to="/join">Join a Chat</router-link>

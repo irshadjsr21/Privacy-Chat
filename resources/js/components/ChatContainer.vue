@@ -58,6 +58,8 @@
             name="message"
             type="text"
             placeholder="Type a message"
+            autocomplete="off"
+            autofocus
           />
         </div>
         <div cols="2" class="chatBtn">
@@ -85,7 +87,7 @@ export default {
         setTimeout(() => {
           const elem = this.$refs.chatMessages;
           elem.scroll(0, elem.scrollHeight);
-        }, 200);
+        }, 0);
       }
     },
   },
@@ -114,7 +116,9 @@ export default {
 <style scoped>
 .chatMessages {
   overflow-y: scroll;
+  overflow-x: hidden;
   height: 100%;
+  width: 100%;
 }
 
 .chatContainer {

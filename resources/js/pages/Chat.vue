@@ -72,6 +72,7 @@ export default {
       messages: [],
       users: [],
       userId: undefined,
+      notificationTone: undefined,
     };
   },
 
@@ -82,7 +83,12 @@ export default {
       } else if (!(this.$route.query && this.$route.query.name)) {
         throw new Error('No Name found');
       }
-
+      try {
+        const notificationTone = new Audio('/audio/message.mp3');
+        this.notificationTone = notificationTone;
+      } catch (error) {
+        console.log(error);
+      }
       const id = this.$route.params.id;
       const name = this.$route.query.name;
       this.name = name;
@@ -197,6 +203,9 @@ export default {
     handleMessage(data) {
       if (data) {
         this.messages.push(data);
+        if (data.userId !== this.userId) {
+          this.playNotification();
+        }
       }
     },
 
@@ -214,9 +223,19 @@ export default {
       }
     },
 
-    runDemo() {
-      this.socket.emit('demo', this.chatId);
+    playNotification() {
+      if (this.notificationTone) {
+        if (!this.notificationTone.ended) {
+          this.notificationTone.pause();
+          this.notificationTone.currentTime = 0;
+        }
+        this.notificationTone.play();
+      }
     },
+
+    // runDemo() {
+    //   this.socket.emit('demo', this.chatId);
+    // },
   },
 };
 </script>

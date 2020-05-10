@@ -52,24 +52,35 @@ module.exports = (http) => {
 
       const name = data.name;
       const id = shortid.generate();
-      db.room.insert({ chatId: id }, (err, doc) => {
+
+      db.room.findOne({ chatId: id }, (err, doc) => {
         if (err) {
           console.error(err);
           cb(SERVER_ERROR);
+        } else if (doc) {
+          console.log('Duplicate chat id');
+          cb(SERVER_ERROR);
         } else {
-          db.user.insert(
-            { chatId: id, userId: socket.id, name },
-            (err, doc) => {
-              if (err) {
-                console.error(err);
-                cb(SERVER_ERROR);
-              } else {
-                socket.join(id);
-                console.log('User created a chat');
-                cb(null, { chatId: id, userId: socket.id });
-              }
-            },
-          );
+          db.room.insert({ chatId: id }, (err, doc) => {
+            if (err) {
+              console.error(err);
+              cb(SERVER_ERROR);
+            } else {
+              db.user.insert(
+                { chatId: id, userId: socket.id, name },
+                (err, doc) => {
+                  if (err) {
+                    console.error(err);
+                    cb(SERVER_ERROR);
+                  } else {
+                    socket.join(id);
+                    console.log('User created a chat');
+                    cb(null, { chatId: id, userId: socket.id });
+                  }
+                },
+              );
+            }
+          });
         }
       });
     });
