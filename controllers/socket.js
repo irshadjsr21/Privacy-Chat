@@ -20,6 +20,7 @@ module.exports = (http) => {
         } else {
           for (const userDoc of docs) {
             if (userDoc.chatId && userDoc.userId) {
+              console.log('User left from chat');
               io.to(userDoc.chatId).emit('userDisconnect', { user: userDoc });
               db.user.remove({ userId: socketId }, (error) => {
                 if (error) {
@@ -32,6 +33,7 @@ module.exports = (http) => {
                   } else {
                     if (!user) {
                       db.room.remove({ chatId: userDoc.chatId });
+                      console.log('Room deleted');
                     }
                   }
                 });
@@ -63,6 +65,7 @@ module.exports = (http) => {
                 cb(SERVER_ERROR);
               } else {
                 socket.join(id);
+                console.log('User created a chat');
                 cb(null, { chatId: id, userId: socket.id });
               }
             },
@@ -100,6 +103,7 @@ module.exports = (http) => {
                   } else {
                     io.to(chatId).emit('newUser', { user: userDoc });
                     socket.join(chatId);
+                    console.log('User joined a chat');
                     cb(null, { chatId, users: doc, userId: socket.id });
                   }
                 },
